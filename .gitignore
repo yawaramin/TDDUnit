@@ -1,0 +1,9 @@
+*.dll
+*.exe
+*.user
+[Bb]in
+[Ddebug]*/
+obj/
+[Rr]elease*/
+*.log
+*.suo
