@@ -25,22 +25,27 @@ namespace TDDUnit {
       }
     }
 
-    public bool WasSetUp {
+    public string Log {
       get {
-        return m_wasSetUp;
+        return m_log;
       }
     }
 
     public override void SetUp() {
-      m_wasSetUp = true;
       m_wasRun = false;
+      m_log = "SetUp ";
     }
 
     public void TestMethod() {
       m_wasRun = true;
+      m_log += "TestMethod ";
+    }
+
+    public override void TearDown() {
+      m_log += "TearDown ";
     }
 
     private bool m_wasRun;
-    private bool m_wasSetUp;
+    private string m_log;
   }
 }

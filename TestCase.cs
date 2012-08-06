@@ -10,6 +10,10 @@
     public void Run() {
       SetUp();
       GetType().GetMethod(m_name).Invoke(this, null);
+      TearDown();
+    }
+
+    public virtual void TearDown() {
     }
 
     private string m_name;
