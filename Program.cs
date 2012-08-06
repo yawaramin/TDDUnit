@@ -5,18 +5,23 @@ namespace TDDUnit {
     public TestTestCase(string name) : base(name) {
     }
 
+    public override void SetUp() {
+      base.SetUp();
+
+      m_test = new WasRunObj("TestMethod");
+    }
+
     public void TestSetUp() {
-      WasRunObj test = new WasRunObj("TestMethod");
-      test.Run();
-      Assert.That(test.WasSetUp, "Expected test to have been set up");
+      m_test.Run();
+      Assert.That(m_test.WasSetUp, "Expected test to have been set up");
     }
 
     public void TestRunning() {
-      WasRunObj test = new WasRunObj("TestMethod");
-      Assert.That(!test.WasRun, "Expected test to not run");
-      test.Run();
-      Assert.That(test.WasRun, "Expected test to run");
+      m_test.Run();
+      Assert.That(m_test.WasRun, "Expected test to run");
     }
+
+    private WasRunObj m_test;
   }
 
   class Program {

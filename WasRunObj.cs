@@ -33,13 +33,14 @@ namespace TDDUnit {
 
     public override void SetUp() {
       m_wasSetUp = true;
+      m_wasRun = false;
     }
 
     public void TestMethod() {
       m_wasRun = true;
     }
 
-    private bool m_wasRun = false;
-    private bool m_wasSetUp = false;
+    private bool m_wasRun;
+    private bool m_wasSetUp;
   }
 }
