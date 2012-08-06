@@ -37,6 +37,7 @@
     <Compile Include="Assert.cs" />
     <Compile Include="TestCase.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="TestResult.cs" />
     <Compile Include="WasRunObj.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -41,6 +41,10 @@ namespace TDDUnit {
       m_log += "TestMethod ";
     }
 
+    public void TestBrokenMethod() {
+      throw new TestRunException("This test is meant to fail");
+    }
+
     public override void TearDown() {
       m_log += "TearDown ";
     }
