@@ -5,11 +5,17 @@ namespace TDDUnit {
     public TestTestCase(string name) : base(name) {
     }
 
+    public void TestSetUp() {
+      WasRunObj test = new WasRunObj("TestMethod");
+      test.Run();
+      Assert.That(test.WasSetUp, "Expected test to have been set up");
+    }
+
     public void TestRunning() {
       WasRunObj test = new WasRunObj("TestMethod");
-      if (test.WasRun) throw new TestRunException("Expected test to not run");
+      Assert.That(!test.WasRun, "Expected test to not run");
       test.Run();
-      if (!test.WasRun) throw new TestRunException("Expected test to run");
+      Assert.That(test.WasRun, "Expected test to run");
     }
   }
 

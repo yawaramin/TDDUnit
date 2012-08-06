@@ -6,7 +6,7 @@ namespace TDDUnit {
       m_message = message;
     }
 
-    public string Message {
+    public override string Message {
       get {
         return m_message;
       }
@@ -25,10 +25,21 @@ namespace TDDUnit {
       }
     }
 
+    public bool WasSetUp {
+      get {
+        return m_wasSetUp;
+      }
+    }
+
+    public override void SetUp() {
+      m_wasSetUp = true;
+    }
+
     public void TestMethod() {
       m_wasRun = true;
     }
 
     private bool m_wasRun = false;
+    private bool m_wasSetUp = false;
   }
 }
