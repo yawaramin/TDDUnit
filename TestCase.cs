@@ -9,9 +9,7 @@ namespace TDDUnit {
     public virtual void SetUp() {
     }
 
-    public TestResult Run() {
-      TestResult result = new TestResult();
-
+    public void Run(TestResult result) {
       result.TestStarted();
 
       try {
@@ -22,7 +20,6 @@ namespace TDDUnit {
       }
 
       TearDown();
-      return result;
     }
 
     public virtual void TearDown() {

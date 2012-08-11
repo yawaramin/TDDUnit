@@ -5,52 +5,73 @@ namespace TDDUnit {
     public TestTestCase(string name) : base(name) {
     }
 
+    public override void SetUp() {
+      base.SetUp();
+
+      m_result = new TestResult();
+    }
+
     public void TestTemplateMethod() {
       WasRunObj test = new WasRunObj("TestMethod");
-      test.Run();
+      test.Run(m_result);
       Assert.Equal("SetUp TestMethod TearDown ", test.Log);
     }
 
     public void TestResult() {
       WasRunObj test = new WasRunObj("TestMethod");
-      TestResult result = test.Run();
-      Assert.Equal("1 run, 0 failed", result.Summary);
+      test.Run(m_result);
+      Assert.Equal("1 run, 0 failed", m_result.Summary);
     }
 
     public void TestFailedResult() {
       WasRunObj test = new WasRunObj("TestBrokenMethod");
-      TestResult result = test.Run();
-      Assert.Equal("1 run, 1 failed", result.Summary);
+      test.Run(m_result);
+      Assert.Equal("1 run, 1 failed", m_result.Summary);
     }
 
     public void TestFailedResultFormatting() {
-      TestResult result = new TestResult();
-      result.TestStarted();
-      result.TestFailed();
-      Assert.Equal("1 run, 1 failed", result.Summary);
+      m_result.TestStarted();
+      m_result.TestFailed();
+      Assert.Equal("1 run, 1 failed", m_result.Summary);
     }
 
     public void TestFailedSetUp() {
       WasRunSetUpFailed test = new WasRunSetUpFailed("TestMethod");
-      TestResult result = new TestResult();
       
-      result.TestStarted();
+      m_result.TestStarted();
       try {
-        test.Run();
+        test.Run(new TestResult());
       } catch (Exception) {
-        result.TestFailed();
+        m_result.TestFailed();
       }
-      Assert.Equal("1 run, 0 failed", result.Summary);
+      Assert.Equal("1 run, 0 failed", m_result.Summary);
     }
+
+    public void TestSuite() {
+      TestSuite suite = new TestSuite();
+      suite.Add(new WasRunObj("TestMethod"));
+      suite.Add(new WasRunObj("TestBrokenMethod"));
+
+      suite.Run(m_result);
+      Assert.Equal("2 run, 1 failed", m_result.Summary);
+    }
+
+    private TestResult m_result;
   }
 
   class Program {
     static void Main() {
-      Console.WriteLine(new TestTestCase("TestTemplateMethod").Run().Summary);
-      Console.WriteLine(new TestTestCase("TestResult").Run().Summary);
-      Console.WriteLine(new TestTestCase("TestFailedResult").Run().Summary);
-      Console.WriteLine(new TestTestCase("TestFailedResultFormatting").Run().Summary);
-      Console.WriteLine(new TestTestCase("TestFailedSetUp").Run().Summary);
+      TestSuite suite = new TestSuite();
+
+      suite.Add(new TestTestCase("TestTemplateMethod"));
+      suite.Add(new TestTestCase("TestResult"));
+      suite.Add(new TestTestCase("TestFailedResult"));
+      suite.Add(new TestTestCase("TestFailedResultFormatting"));
+      suite.Add(new TestTestCase("TestFailedSetUp"));
+
+      TestResult result = new TestResult();
+      suite.Run(result);
+      Console.WriteLine(result.Summary);
     }
   }
 }
