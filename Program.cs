@@ -67,16 +67,9 @@ namespace TDDUnit {
 
   class Program {
     static void Main() {
-      TestSuite suite = new TestSuite();
-
-      suite.Add(new TestTestCase("TestTemplateMethod"));
-      suite.Add(new TestTestCase("TestResult"));
-      suite.Add(new TestTestCase("TestFailedResult"));
-      suite.Add(new TestTestCase("TestFailedResultFormatting"));
-      suite.Add(new TestTestCase("TestFailedSetUp"));
-      suite.Add(new TestTestCase("TestRunAllTests"));
-
+      TestSuite suite = new TestSuite(typeof (TestTestCase));
       TestResult result = new TestResult();
+      
       suite.Run(result);
       Console.WriteLine(result.Summary);
     }
