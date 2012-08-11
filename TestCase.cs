@@ -13,9 +13,9 @@ namespace TDDUnit {
       TestResult result = new TestResult();
 
       result.TestStarted();
-      SetUp();
 
       try {
+        SetUp();
         GetType().GetMethod(m_name).Invoke(this, null);
       } catch (Exception) {
         result.TestFailed();
