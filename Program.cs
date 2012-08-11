@@ -56,6 +56,12 @@ namespace TDDUnit {
       Assert.Equal("2 run, 1 failed", m_result.Summary);
     }
 
+    public void TestRunAllTests() {
+      TestSuite suite = new TestSuite(typeof (WasRunObj));
+      suite.Run(m_result);
+      Assert.Equal("2 run, 1 failed", m_result.Summary);
+    }
+
     private TestResult m_result;
   }
 
@@ -68,6 +74,7 @@ namespace TDDUnit {
       suite.Add(new TestTestCase("TestFailedResult"));
       suite.Add(new TestTestCase("TestFailedResultFormatting"));
       suite.Add(new TestTestCase("TestFailedSetUp"));
+      suite.Add(new TestTestCase("TestRunAllTests"));
 
       TestResult result = new TestResult();
       suite.Run(result);
