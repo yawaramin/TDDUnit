@@ -1,0 +1,4 @@
+Add concept of test result
+
+Implemented by the TestResult object, a test result keeps track of how many
+tests were run and (later on) how many failed.
