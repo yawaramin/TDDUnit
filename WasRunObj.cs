@@ -42,6 +42,7 @@ namespace TDDUnit {
     }
 
     public void TestBrokenMethod() {
+      m_log += "TestBrokenMethod ";
       throw new TestRunException("This test is meant to fail");
     }
 
