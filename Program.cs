@@ -22,6 +22,13 @@ namespace TDDUnit {
       TestResult result = test.Run();
       Assert.That("1 run, 1 failed" == result.Summary);
     }
+
+    public void TestFailedResultFormatting() {
+      TestResult result = new TestResult();
+      result.TestStarted();
+      result.TestFailed();
+      Assert.That("1 run, 1 failed" == result.Summary);
+    }
   }
 
   class Program {
@@ -29,6 +36,7 @@ namespace TDDUnit {
       new TestTestCase("TestTemplateMethod").Run();
       new TestTestCase("TestResult").Run();
       new TestTestCase("TestFailedResult").Run();
+      new TestTestCase("TestFailedResultFormatting").Run();
     }
   }
 }
