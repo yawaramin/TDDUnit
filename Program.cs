@@ -33,10 +33,10 @@ namespace TDDUnit {
 
   class Program {
     static void Main() {
-      new TestTestCase("TestTemplateMethod").Run();
-      new TestTestCase("TestResult").Run();
-      new TestTestCase("TestFailedResult").Run();
-      new TestTestCase("TestFailedResultFormatting").Run();
+      Console.WriteLine(new TestTestCase("TestTemplateMethod").Run().Summary);
+      Console.WriteLine(new TestTestCase("TestResult").Run().Summary);
+      Console.WriteLine(new TestTestCase("TestFailedResult").Run().Summary);
+      Console.WriteLine(new TestTestCase("TestFailedResultFormatting").Run().Summary);
     }
   }
 }
