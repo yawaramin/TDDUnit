@@ -62,6 +62,12 @@ namespace TDDUnit {
       Assert.Equal("2 run, 1 failed", m_result.Summary);
     }
 
+    public void TestTearDownWhenTestFailed() {
+      WasRunObj test = new WasRunObj("TestBrokenMethod");
+      test.Run(m_result);
+      Assert.Equal("SetUp TestBrokenMethod TearDown ", test.Log);
+    }
+
     private TestResult m_result;
   }
 
