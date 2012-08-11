@@ -39,6 +39,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="TestResult.cs" />
     <Compile Include="WasRunObj.cs" />
+    <Compile Include="WasRunSetUpFailed.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
