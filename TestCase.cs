@@ -14,12 +14,17 @@ namespace TDDUnit {
 
       try {
         SetUp();
+      } catch (Exception) {
+        return;
+      }
+      
+      try {
         GetType().GetMethod(m_name).Invoke(this, null);
       } catch (Exception) {
         result.TestFailed();
+      } finally {
+        TearDown();
       }
-
-      TearDown();
     }
 
     public virtual void TearDown() {

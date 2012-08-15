@@ -47,6 +47,13 @@ namespace TDDUnit {
       Assert.Equal("1 run, 0 failed", m_result.Summary);
     }
 
+    public void TestNoTearDownWhenSetUpFailed() {
+      WasRunSetUpFailed test = new WasRunSetUpFailed("TestMethod");
+
+      test.Run(m_result);
+      Assert.Equal("SetUp ", test.Log);
+    }
+
     public void TestSuite() {
       TestSuite suite = new TestSuite();
       suite.Add(new WasRunObj("TestMethod"));
