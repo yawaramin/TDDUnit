@@ -27,6 +27,12 @@ namespace TDDUnit {
       }
     }
 
+    public string Name {
+      get {
+        return m_name;
+      }
+    }
+
     public virtual void TearDown() {
     }
 

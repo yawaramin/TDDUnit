@@ -22,6 +22,17 @@ namespace TDDUnit {
       foreach (TestCase test in m_tests) test.Run(result);
     }
 
+    public IEnumerable<string> FailedTests(TestResult result) {
+      int oldErrorCount = result.ErrorCount;
+
+      foreach (TestCase test in m_tests) {
+        test.Run(result);
+        if (result.ErrorCount == oldErrorCount + 1) {
+          yield return test.Name;
+        }
+      }
+    }
+
     private List<TestCase> m_tests = new List<TestCase>();
   }
 }

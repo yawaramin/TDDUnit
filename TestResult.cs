@@ -14,6 +14,12 @@
       }
     }
 
+    public int ErrorCount {
+      get {
+        return m_errorCount;
+      }
+    }
+
     private int m_runCount = 0;
     private int m_errorCount = 0;
   }

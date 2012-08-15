@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TDDUnit {
   class TestTestCase : TestCase {
@@ -73,6 +74,12 @@ namespace TDDUnit {
       WasRunObj test = new WasRunObj("TestBrokenMethod");
       test.Run(m_result);
       Assert.Equal("SetUp TestBrokenMethod TearDown ", test.Log);
+    }
+
+    public void TestYieldFailedTestNames() {
+      TestSuite suite = new TestSuite(typeof (WasRunObj));
+      Assert.That(new HashSet<string>(suite.FailedTests(m_result))
+        .SetEquals(new HashSet<string>(new string[] { "TestBrokenMethod" })));
     }
 
     private TestResult m_result;
