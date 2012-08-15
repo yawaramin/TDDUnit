@@ -89,8 +89,10 @@ namespace TDDUnit {
     static void Main() {
       TestSuite suite = new TestSuite(typeof (TestTestCase));
       TestResult result = new TestResult();
-      
-      suite.Run(result);
+
+      foreach (string test in suite.FailedTests(result)) {
+        Console.WriteLine("Failed: " + test);
+      }
       Console.WriteLine(result.Summary);
     }
   }
