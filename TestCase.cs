@@ -10,14 +10,14 @@ namespace TDDUnit {
     }
 
     public void Run(TestResult result) {
-      result.TestStarted();
 
       try {
         SetUp();
       } catch (Exception) {
         return;
       }
-      
+
+      result.TestStarted();
       try {
         GetType().GetMethod(m_name).Invoke(this, null);
       } catch (Exception) {
