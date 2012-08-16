@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 
 namespace TDDUnit {
-  class TestTestCase : TestCase {
+  class TestTestCase : Case {
     public TestTestCase(string name) : base(name) {
     }
 
     public override void SetUp() {
       base.SetUp();
 
-      m_result = new TestResult();
+      m_result = new Result();
     }
 
     public void TestTemplateMethod() {
@@ -41,7 +41,7 @@ namespace TDDUnit {
       
       m_result.TestStarted();
       try {
-        test.Run(new TestResult());
+        test.Run(new Result());
       } catch (Exception) {
         m_result.TestFailed();
       }
@@ -63,7 +63,7 @@ namespace TDDUnit {
     }
 
     public void TestSuite() {
-      TestSuite suite = new TestSuite();
+      Suite suite = new Suite();
       suite.Add(new WasRunObj("TestMethod"));
       suite.Add(new WasRunObj("TestBrokenMethod"));
 
@@ -72,7 +72,7 @@ namespace TDDUnit {
     }
 
     public void TestRunAllTests() {
-      TestSuite suite = new TestSuite(typeof (WasRunObj));
+      Suite suite = new Suite(typeof (WasRunObj));
       suite.Run(m_result);
       Assert.Equal("2 run, 1 failed", m_result.Summary);
     }
@@ -84,18 +84,18 @@ namespace TDDUnit {
     }
 
     public void TestYieldFailedTestNames() {
-      TestSuite suite = new TestSuite(typeof (WasRunObj));
+      Suite suite = new Suite(typeof (WasRunObj));
       Assert.That(new HashSet<string>(suite.FailedTests(m_result))
         .SetEquals(new HashSet<string>(new string[] { "TestBrokenMethod" })));
     }
 
-    private TestResult m_result;
+    private Result m_result;
   }
 
   class Program {
     static void Main() {
-      TestSuite suite = new TestSuite(typeof (TestTestCase));
-      TestResult result = new TestResult();
+      Suite suite = new Suite(typeof (TestTestCase));
+      Result result = new Result();
 
       foreach (string test in suite.FailedTests(result)) {
         Console.WriteLine("Failed: " + test);

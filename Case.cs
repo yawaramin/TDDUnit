@@ -1,15 +1,15 @@
 ﻿using System;
 
 namespace TDDUnit {
-  class TestCase {
-    public TestCase(string name) {
+  class Case {
+    public Case(string name) {
       m_name = name;
     }
 
     public virtual void SetUp() {
     }
 
-    public void Run(TestResult result) {
+    public void Run(Result result) {
 
       try {
         SetUp();

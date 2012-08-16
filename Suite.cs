@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace TDDUnit {
-  class TestSuite {
-    public TestSuite(Type type = null) {
+  class Suite {
+    public Suite(Type type = null) {
       if (type != null) {
         var methodInfos = from methodInfo in type.GetMethods()
                           where methodInfo.Name.StartsWith("Test")
                           select methodInfo;
         foreach (var methodInfo in methodInfos)
-          Add((TestCase)type.GetConstructor(new Type[] { typeof(string) }).Invoke(new string[] { methodInfo.Name }));
+          Add((Case)type.GetConstructor(new Type[] { typeof(string) }).Invoke(new string[] { methodInfo.Name }));
       }
     }
 
-    public void Add(TestCase test) {
+    public void Add(Case test) {
       m_tests.Add(test);
     }
 
-    public void Run(TestResult result) {
-      foreach (TestCase test in m_tests) test.Run(result);
+    public void Run(Result result) {
+      foreach (Case test in m_tests) test.Run(result);
     }
 
-    public IEnumerable<string> FailedTests(TestResult result) {
+    public IEnumerable<string> FailedTests(Result result) {
       int oldErrorCount;
 
-      foreach (TestCase test in m_tests) {
+      foreach (Case test in m_tests) {
         oldErrorCount = result.ErrorCount;
         test.Run(result);
         if (result.ErrorCount == oldErrorCount + 1) {
@@ -34,6 +34,6 @@ namespace TDDUnit {
       }
     }
 
-    private List<TestCase> m_tests = new List<TestCase>();
+    private List<Case> m_tests = new List<Case>();
   }
 }

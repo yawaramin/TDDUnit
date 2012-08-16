@@ -15,7 +15,7 @@ namespace TDDUnit {
     private string m_message;
   }
 
-  class WasRunObj : TestCase {
+  class WasRunObj : Case {
     public WasRunObj(string name) : base(name) {
     }
 

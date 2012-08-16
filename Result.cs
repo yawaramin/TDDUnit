@@ -1,5 +1,5 @@
 ﻿namespace TDDUnit {
-  class TestResult {
+  class Result {
     public void TestStarted() {
       m_runCount++;
     }
