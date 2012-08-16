@@ -62,7 +62,26 @@ namespace TDDUnit {
       Assert.Equal("SetUp ", test.Log);
     }
 
-    public void TestSuite() {
+    public void TestTearDownWhenTestFailed() {
+      WasRunObj test = new WasRunObj("TestBrokenMethod");
+      test.Run(m_result);
+      Assert.Equal("SetUp TestBrokenMethod TearDown ", test.Log);
+    }
+
+    private Result m_result;
+  }
+
+  class TestSuite : Case {
+    public TestSuite(string name) : base(name) {
+    }
+
+    public override void SetUp() {
+      base.SetUp();
+
+      m_result = new Result();
+    }
+
+    public void TestSuiteOperation() {
       Suite suite = new Suite();
       suite.Add(new WasRunObj("TestMethod"));
       suite.Add(new WasRunObj("TestBrokenMethod"));
@@ -72,19 +91,13 @@ namespace TDDUnit {
     }
 
     public void TestRunAllTests() {
-      Suite suite = new Suite(typeof (WasRunObj));
+      Suite suite = new Suite(typeof(WasRunObj));
       suite.Run(m_result);
       Assert.Equal("2 run, 1 failed", m_result.Summary);
     }
 
-    public void TestTearDownWhenTestFailed() {
-      WasRunObj test = new WasRunObj("TestBrokenMethod");
-      test.Run(m_result);
-      Assert.Equal("SetUp TestBrokenMethod TearDown ", test.Log);
-    }
-
     public void TestYieldFailedTestNames() {
-      Suite suite = new Suite(typeof (WasRunObj));
+      Suite suite = new Suite(typeof(WasRunObj));
       Assert.That(new HashSet<string>(suite.FailedTests(m_result))
         .SetEquals(new HashSet<string>(new string[] { "TestBrokenMethod" })));
     }
@@ -96,6 +109,14 @@ namespace TDDUnit {
     static void Main() {
       Suite suite = new Suite(typeof (TestCase));
       Result result = new Result();
+
+      foreach (string test in suite.FailedTests(result)) {
+        Console.WriteLine("Failed: " + test);
+      }
+      Console.WriteLine(result.Summary);
+
+      suite = new Suite(typeof(TestSuite));
+      result = new Result();
 
       foreach (string test in suite.FailedTests(result)) {
         Console.WriteLine("Failed: " + test);
