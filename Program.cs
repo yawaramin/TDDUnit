@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 
 namespace TDDUnit {
-  class TestTestCase : Case {
-    public TestTestCase(string name) : base(name) {
+  class TestCase : Case {
+    public TestCase(string name) : base(name) {
     }
 
     public override void SetUp() {
@@ -94,7 +94,7 @@ namespace TDDUnit {
 
   class Program {
     static void Main() {
-      Suite suite = new Suite(typeof (TestTestCase));
+      Suite suite = new Suite(typeof (TestCase));
       Result result = new Result();
 
       foreach (string test in suite.FailedTests(result)) {
