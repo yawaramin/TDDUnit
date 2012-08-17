@@ -105,6 +105,14 @@ namespace TDDUnit {
     private Result m_result;
   }
 
+  class TestRunner : Case {
+    public TestRunner(string name) : base(name) {}
+
+    public void TestRunAllTestCases() {
+      Assert.Equal("11 run, 0 failed", (new Runner(typeof (TestRunner))).Summary);
+    }
+  }
+
   class Program {
     static void Main() {
       Suite suite = new Suite(typeof (TestCase));
@@ -116,6 +124,14 @@ namespace TDDUnit {
       Console.WriteLine(result.Summary);
 
       suite = new Suite(typeof(TestSuite));
+      result = new Result();
+
+      foreach (string test in suite.FailedTests(result)) {
+        Console.WriteLine("Failed: " + test);
+      }
+      Console.WriteLine(result.Summary);
+
+      suite = new Suite(typeof (TestRunner));
       result = new Result();
 
       foreach (string test in suite.FailedTests(result)) {

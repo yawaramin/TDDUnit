@@ -5,13 +5,15 @@ using System.Linq;
 namespace TDDUnit {
   class Suite {
     public Suite(Type type = null) {
-      if (type != null) {
-        var methodInfos = from methodInfo in type.GetMethods()
-                          where methodInfo.Name.StartsWith("Test")
-                          select methodInfo;
-        foreach (var methodInfo in methodInfos)
-          Add((Case)type.GetConstructor(new Type[] { typeof(string) }).Invoke(new string[] { methodInfo.Name }));
-      }
+      if (type != null) Add(type);
+    }
+
+    public void Add(Type type) {
+      var methodInfos = from methodInfo in type.GetMethods()
+                        where methodInfo.Name.StartsWith("Test")
+                        select methodInfo;
+      foreach (var methodInfo in methodInfos)
+        Add((Case)type.GetConstructor(new Type[] { typeof(string) }).Invoke(new string[] { methodInfo.Name }));
     }
 
     public void Add(Case test) {

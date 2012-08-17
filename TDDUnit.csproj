@@ -38,6 +38,7 @@
     <Compile Include="Case.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Result.cs" />
+    <Compile Include="Runner.cs" />
     <Compile Include="Suite.cs" />
     <Compile Include="WasRunObj.cs" />
     <Compile Include="WasRunSetUpFailed.cs" />
