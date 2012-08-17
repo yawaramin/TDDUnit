@@ -115,28 +115,11 @@ namespace TDDUnit {
 
   class Program {
     static void Main() {
-      Suite suite = new Suite(typeof (TestCase));
+      Suite suite = new Suite(typeof(TestRunner));
       Result result = new Result();
 
-      foreach (string test in suite.FailedTests(result)) {
+      foreach (string test in suite.FailedTests(result))
         Console.WriteLine("Failed: " + test);
-      }
-      Console.WriteLine(result.Summary);
-
-      suite = new Suite(typeof(TestSuite));
-      result = new Result();
-
-      foreach (string test in suite.FailedTests(result)) {
-        Console.WriteLine("Failed: " + test);
-      }
-      Console.WriteLine(result.Summary);
-
-      suite = new Suite(typeof (TestRunner));
-      result = new Result();
-
-      foreach (string test in suite.FailedTests(result)) {
-        Console.WriteLine("Failed: " + test);
-      }
       Console.WriteLine(result.Summary);
     }
   }
