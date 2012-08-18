@@ -4,12 +4,17 @@ using System.Reflection;
 
 namespace TDDUnit {
   class Runner {
-    public Runner(Type exceptType) {
+    public Runner(Type callingType) {
       Suite suite = new Suite();
       m_result = new Result();
+      Type[] forbiddenTypes = new Type[] {
+        callingType
+      , typeof (TDDUnit.WasRunObj)
+      , typeof (TDDUnit.WasRunSetUpFailed)
+      };
 
       foreach (Type t in Assembly.GetEntryAssembly().GetTypes()) {
-        if (t.Name.StartsWith("Test") && t.Name != exceptType.Name)
+        if (t.IsSubclassOf(typeof (TDDUnit.Case)) && !forbiddenTypes.Contains(t))
           suite.Add(t);
       }
 
