@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.IO;
 
 namespace TDDUnit {
   class Runner {
-    public Runner(Type callingType) {
+    /*
+     * output - a destination to write results out to. To write output
+     * to the standard output, pass in System.Console.Out
+     */
+    public Runner(Type callingType, TextWriter output) {
       Suite suite = new Suite();
-      m_result = new Result();
+      Result result = new Result();
       Type[] forbiddenTypes = new Type[] {
         callingType
       , typeof (TDDUnit.WasRunObj)
@@ -18,18 +23,10 @@ namespace TDDUnit {
           suite.Add(t);
       }
 
-      foreach (string test in suite.FailedTests(m_result)) {
-        Console.WriteLine("Failed: " + test);
+      foreach (string test in suite.FailedTests(result)) {
+        output.WriteLine("Failed: " + test);
       }
-      Console.WriteLine(m_result.Summary);
+      output.WriteLine(result.Summary);
     }
-
-    public string Summary {
-      get {
-        return m_result.Summary;
-      }
-    }
-
-    private Result m_result;
   }
 }

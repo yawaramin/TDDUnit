@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace TDDUnit {
   class TestCase : Case {
@@ -109,7 +110,13 @@ namespace TDDUnit {
     public TestRunner(string name) : base(name) {}
 
     public void TestRunAllTestCases() {
-      Assert.Equal("11 run, 0 failed", (new Runner(typeof (TestRunner))).Summary);
+      StringWriter expected = new StringWriter();
+      expected.WriteLine("11 run, 0 failed");
+
+      StringWriter actual = new StringWriter();
+      new Runner(typeof (TestRunner), actual);
+
+      Assert.Equal(expected.ToString(), actual.ToString());
     }
   }
 
