@@ -9,7 +9,13 @@ namespace TDDUnit {
      * output - a destination to write results out to. To write output
      * to the standard output, pass in System.Console.Out
      */
-    public Runner(Type callingType, TextWriter output, Result result) {
+    public static void Run(TextWriter output, Result result) {
+      Run(output, result, null);
+    }
+
+    public static void Run(TextWriter output, Result result, Type callingType) {
+      if (callingType == null) callingType = typeof (TDDUnit.Runner);
+
       Suite suite = new Suite();
       Type[] forbiddenTypes = new Type[] {
         callingType

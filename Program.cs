@@ -114,7 +114,7 @@ namespace TDDUnit {
       expected.WriteLine("12 run, 0 failed");
 
       StringWriter actual = new StringWriter();
-      new Runner(typeof (TestRunner), actual, Program.m_result);
+      Runner.Run(actual, Program.m_result, typeof (TestRunner));
 
       Assert.Equal(expected.ToString(), actual.ToString());
     }
