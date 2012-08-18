@@ -111,23 +111,24 @@ namespace TDDUnit {
 
     public void TestRunAllTestCases() {
       StringWriter expected = new StringWriter();
-      expected.WriteLine("11 run, 0 failed");
+      expected.WriteLine("12 run, 0 failed");
 
       StringWriter actual = new StringWriter();
-      new Runner(typeof (TestRunner), actual);
+      new Runner(typeof (TestRunner), actual, Program.m_result);
 
       Assert.Equal(expected.ToString(), actual.ToString());
     }
   }
 
   class Program {
+    public static Result m_result = new Result();
+
     static void Main() {
       Suite suite = new Suite(typeof(TestRunner));
-      Result result = new Result();
 
-      foreach (string test in suite.FailedTests(result))
+      foreach (string test in suite.FailedTests(m_result))
         Console.WriteLine("Failed: " + test);
-      Console.WriteLine(result.Summary);
+      Console.WriteLine(m_result.Summary);
     }
   }
 }
