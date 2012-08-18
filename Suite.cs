@@ -4,7 +4,9 @@ using System.Linq;
 
 namespace TDDUnit {
   class Suite {
-    public Suite(Type type = null) {
+    public Suite() {}
+
+    public Suite(Type type) {
       if (type != null) Add(type);
     }
 
