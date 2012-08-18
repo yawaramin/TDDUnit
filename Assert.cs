@@ -3,7 +3,7 @@
 namespace TDDUnit {
   class Assert {
     private static void Fail(object expected, object actual) {
-      string message = string.Format("Expected: '{0}'; Actual: '{1}'", expected, actual);
+      string message = string.Format("Expected: '{0}'\nActual: '{1}'", expected, actual);
       Console.WriteLine(message);
       throw new TestRunException(message);
     }
