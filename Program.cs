@@ -128,12 +128,40 @@ namespace TDDUnit {
 
     public void TestRunAllTestCases() {
       StringWriter expected = new StringWriter();
-      expected.WriteLine("12 run, 0 failed");
+      expected.WriteLine("16 run, 0 failed");
 
       StringWriter actual = new StringWriter();
       Runner.Run(actual, Program.m_result, typeof (TestRunner));
 
       Assert.Equal(expected.ToString(), actual.ToString());
+    }
+  }
+
+  class TestAssert : Case {
+    public TestAssert(string name) : base(name) {}
+
+    public void TestAssertEqualWhenEqualShouldSucceed() {
+      Assert.Equal(1, 1);
+    }
+
+    public void TestAssertEqualWhenNotEqualShouldFail() {
+      try {
+        Assert.Equal(1, 2);
+      } catch (TestRunException e) {
+        Assert.Equal("Expected:  '1'" + Environment.NewLine + "Actual: '2'", e.Message);
+      }
+    }
+
+    public void TestAssertNotEqualWhenEqualShouldFail() {
+      try {
+        Assert.NotEqual(1, 1);
+      } catch (TestRunException e) {
+        Assert.Equal("Expected: Not '1'" + Environment.NewLine + "Actual: '1'", e.Message);
+      }
+    }
+
+    public void TestAssertNotEqualWhenNotEqualShouldSucceed() {
+      Assert.NotEqual(1, 2);
     }
   }
 
