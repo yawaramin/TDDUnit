@@ -1,4 +1,4 @@
-﻿/*
+/*
    TDDUnit
 
    Copyright 2012 Yawar Quadir Amin
@@ -20,7 +20,7 @@ using System;
 namespace TDDUnit {
   class Assert {
     private static void Fail(object expected, object actual, bool equal) {
-      string message = string.Format("Expected: {2} '{0}'{3}Actual: '{1}'", expected, actual, (equal ? "" : "Not"), Environment.NewLine);
+      string message = string.Format("Expected {2} '{0}'{3}Actual == '{1}'", expected, actual, (equal ? "==" : "=/="), Environment.NewLine);
       Console.WriteLine(message);
       throw new TestRunException(message);
     }
@@ -39,6 +39,15 @@ namespace TDDUnit {
 
     public static void That(bool condition) {
       Equal(true, condition);
+    }
+
+    public static void Throws<TException>(Action action) where TException : Exception {
+      try {
+        action();
+      } catch (TException) {
+        return;
+      }
+      Fail("<" + (typeof (TException)).Name + ">", string.Empty, true);
     }
   }
 }

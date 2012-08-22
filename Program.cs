@@ -1,4 +1,4 @@
-﻿/*
+/*
    TDDUnit
 
    Copyright 2012 Yawar Quadir Amin
@@ -128,7 +128,7 @@ namespace TDDUnit {
 
     public void TestRunAllTestCases() {
       StringWriter expected = new StringWriter();
-      expected.WriteLine("16 run, 0 failed");
+      expected.WriteLine("18 run, 0 failed");
 
       StringWriter actual = new StringWriter();
       Runner.Run(actual, Program.m_result, typeof (TestRunner));
@@ -144,11 +144,15 @@ namespace TDDUnit {
       Assert.Equal(1, 1);
     }
 
+    public void TestAssertNotEqualWhenNotEqualShouldSucceed() {
+      Assert.NotEqual(1, 2);
+    }
+
     public void TestAssertEqualWhenNotEqualShouldFail() {
       try {
         Assert.Equal(1, 2);
       } catch (TestRunException e) {
-        Assert.Equal("Expected:  '1'" + Environment.NewLine + "Actual: '2'", e.Message);
+        Assert.Equal("Expected == '1'" + Environment.NewLine + "Actual == '2'", e.Message);
       }
     }
 
@@ -156,12 +160,20 @@ namespace TDDUnit {
       try {
         Assert.NotEqual(1, 1);
       } catch (TestRunException e) {
-        Assert.Equal("Expected: Not '1'" + Environment.NewLine + "Actual: '1'", e.Message);
+        Assert.Equal("Expected =/= '1'" + Environment.NewLine + "Actual == '1'", e.Message);
       }
     }
 
-    public void TestAssertNotEqualWhenNotEqualShouldSucceed() {
-      Assert.NotEqual(1, 2);
+    public void TestAssertThrowsShouldSucceedIfExceptionThrown() {
+      Assert.Throws<TestRunException>(() => { throw new TestRunException("Test"); });
+    }
+
+    public void TestAssertThrowsShouldFailIfExceptionNotThrown() {
+      try {
+        Assert.Throws<TestRunException>(() => {});
+      } catch(TestRunException e) {
+        Assert.Equal("Expected == '<TestRunException>'" + Environment.NewLine + "Actual == ''", e.Message);
+      }
     }
   }
 
