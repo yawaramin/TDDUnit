@@ -21,7 +21,7 @@ using System.Reflection;
 using System.IO;
 
 namespace TDDUnit {
-  class Runner {
+  public class Runner {
     /*
      * output - a destination to write results out to. To write output
      * to the standard output, pass in System.Console.Out

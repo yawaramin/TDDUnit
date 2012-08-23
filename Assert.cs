@@ -18,7 +18,7 @@
 using System;
 
 namespace TDDUnit {
-  class Assert {
+  public class Assert {
     private static void Fail(object expected, object actual, bool equal) {
       string message = string.Format("Expected {2} '{0}'{3}Actual == '{1}'", expected, actual, (equal ? "==" : "=/="), Environment.NewLine);
       Console.WriteLine(message);

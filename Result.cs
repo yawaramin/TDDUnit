@@ -16,7 +16,7 @@
    limitations under the License.
 */
 namespace TDDUnit {
-  class Result {
+  public class Result {
     public void TestStarted() {
       m_runCount++;
     }
