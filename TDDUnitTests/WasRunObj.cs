@@ -15,25 +15,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using System;
+using TDDUnit;
 
-namespace TDDUnit {
-  class TestRunException : Exception {
-    public TestRunException(string message) {
-      m_message = message;
-    }
-
-    public override string Message {
-      get {
-        return m_message;
-      }
-    }
-
-    private string m_message;
-  }
-
+namespace TDDUnitTests {
   class WasRunObj : Case {
-    public WasRunObj(string name) : base(name) {
+    public WasRunObj(string name)
+      : base(name) {
     }
 
     public bool WasRun {

@@ -18,10 +18,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using TDDUnit;
 
-namespace TDDUnit {
+namespace TDDUnitTests {
   class TestCase : Case {
-    public TestCase(string name) : base(name) {
+    public TestCase(string name)
+      : base(name) {
     }
 
     public override void SetUp() {
@@ -56,7 +58,7 @@ namespace TDDUnit {
 
     public void TestFailedSetUp() {
       WasRunSetUpFailed test = new WasRunSetUpFailed("TestMethod");
-      
+
       m_result.TestStarted();
       try {
         test.Run(new Result());
@@ -90,7 +92,8 @@ namespace TDDUnit {
   }
 
   class TestSuite : Case {
-    public TestSuite(string name) : base(name) {
+    public TestSuite(string name)
+      : base(name) {
     }
 
     public override void SetUp() {
@@ -124,21 +127,21 @@ namespace TDDUnit {
   }
 
   class TestRunner : Case {
-    public TestRunner(string name) : base(name) {}
+    public TestRunner(string name) : base(name) { }
 
     public void TestRunAllTestCases() {
       StringWriter expected = new StringWriter();
-      expected.WriteLine("18 run, 0 failed");
+      expected.WriteLine("17 run, 0 failed");
 
       StringWriter actual = new StringWriter();
-      Runner.Run(actual, Program.m_result, typeof (TestRunner));
+      Runner.Run(actual, new Result());
 
       Assert.Equal(expected.ToString(), actual.ToString());
     }
   }
 
   class TestAssert : Case {
-    public TestAssert(string name) : base(name) {}
+    public TestAssert(string name) : base(name) { }
 
     public void TestAssertEqualWhenEqualShouldSucceed() {
       Assert.Equal(1, 1);
@@ -170,22 +173,16 @@ namespace TDDUnit {
 
     public void TestAssertThrowsShouldFailIfExceptionNotThrown() {
       try {
-        Assert.Throws<TestRunException>(() => {});
-      } catch(TestRunException e) {
+        Assert.Throws<TestRunException>(() => { });
+      } catch (TestRunException e) {
         Assert.Equal("Expected == '<TestRunException>'" + Environment.NewLine + "Actual == ''", e.Message);
       }
     }
   }
 
   class Program {
-    public static Result m_result = new Result();
-
     static void Main() {
-      Suite suite = new Suite(typeof(TestRunner));
-
-      foreach (string test in suite.FailedTests(m_result))
-        Console.WriteLine("Failed: " + test);
-      Console.WriteLine(m_result.Summary);
+      Runner.Run(Console.Out, new Result());
     }
   }
 }
