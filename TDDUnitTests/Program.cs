@@ -182,12 +182,7 @@ namespace TDDUnitTests {
 
   class Program {
     static void Main() {
-      Result result = new Result();
-      Suite suite = new Suite(typeof(TestRunner));
-
-      foreach (string test in suite.FailedTests(result))
-        Console.WriteLine("Failed: " + test);
-      Console.WriteLine(result.Summary);
+      Runner.Run(Console.Out, new Result());
     }
   }
 }
