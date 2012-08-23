@@ -27,6 +27,7 @@ namespace TDDUnit {
      * to the standard output, pass in System.Console.Out
      */
     public static void Run(TextWriter output, Result result) {
+      Assert.Output = output;
       Suite suite = new Suite();
       Type[] entryAssemblyTypes = Assembly.GetEntryAssembly().GetTypes();
       Type[] forbiddenTypes = new Type[] {
