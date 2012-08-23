@@ -28,12 +28,17 @@ namespace TDDUnit {
      */
     public static void Run(TextWriter output, Result result) {
       Suite suite = new Suite();
+      Type[] entryAssemblyTypes = Assembly.GetEntryAssembly().GetTypes();
+      Type[] forbiddenTypes = new Type[] {
+        GetTypeFromAssemblyTypes(entryAssemblyTypes, "TestRunner")
+      , GetTypeFromAssemblyTypes(entryAssemblyTypes, "WasRunObj")
+      , GetTypeFromAssemblyTypes(entryAssemblyTypes, "WasRunSetUpFailed")
+      };
 
-      foreach (Type t in Assembly.GetEntryAssembly().GetTypes()) {
+      foreach (Type t in entryAssemblyTypes) {
         if (t.IsSubclassOf(typeof(TDDUnit.Case))
-          && !Assembly.GetExecutingAssembly().GetTypes().Contains(t)) {
+          && !forbiddenTypes.Contains(t)) {
           suite.Add(t);
-          Console.WriteLine("Added " + t.Name);
         }
       }
 
@@ -41,6 +46,10 @@ namespace TDDUnit {
         output.WriteLine("Failed: " + test);
       }
       output.WriteLine(result.Summary);
+    }
+
+    private static Type GetTypeFromAssemblyTypes(Type[] assemblyTypes, string name) {
+      return assemblyTypes.Single(typ => typ.Name == name);
     }
   }
 }

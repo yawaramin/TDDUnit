@@ -131,10 +131,10 @@ namespace TDDUnitTests {
 
     public void TestRunAllTestCases() {
       StringWriter expected = new StringWriter();
-      expected.WriteLine("18 run, 0 failed");
+      expected.WriteLine("17 run, 0 failed");
 
       StringWriter actual = new StringWriter();
-      Runner.Run(actual, Program.m_result);
+      Runner.Run(actual, new Result());
 
       Assert.Equal(expected.ToString(), actual.ToString());
     }
@@ -181,14 +181,13 @@ namespace TDDUnitTests {
   }
 
   class Program {
-    public static Result m_result = new Result();
-
     static void Main() {
+      Result result = new Result();
       Suite suite = new Suite(typeof(TestRunner));
 
-      foreach (string test in suite.FailedTests(m_result))
+      foreach (string test in suite.FailedTests(result))
         Console.WriteLine("Failed: " + test);
-      Console.WriteLine(m_result.Summary);
+      Console.WriteLine(result.Summary);
     }
   }
 }
