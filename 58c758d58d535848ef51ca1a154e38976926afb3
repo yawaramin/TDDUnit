@@ -1,0 +1,2 @@
+Right now we're only guaranteeing correct behaviour from Assert if the
+tests are all run from Runner.Run().
