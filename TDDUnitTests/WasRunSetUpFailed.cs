@@ -15,9 +15,12 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-namespace TDDUnit {
+using TDDUnit;
+
+namespace TDDUnitTests {
   class WasRunSetUpFailed : WasRunObj {
-    public WasRunSetUpFailed(string name) : base(name) {
+    public WasRunSetUpFailed(string name)
+      : base(name) {
     }
 
     public override void SetUp() {

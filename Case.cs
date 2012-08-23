@@ -18,7 +18,7 @@
 using System;
 
 namespace TDDUnit {
-  abstract class Case {
+  public abstract class Case {
     public Case(string name) {
       m_name = name;
     }

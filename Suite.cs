@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace TDDUnit {
-  class Suite {
+  public class Suite {
     public Suite() {}
 
     public Suite(Type type) {
