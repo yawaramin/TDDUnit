@@ -22,7 +22,7 @@ namespace TDDUnit {
   public class Assert {
     public static TextWriter Output { get; set; }
 
-    private static void Fail(object expected, object actual, bool equal) {
+    public static void Fail(object expected, object actual, bool equal) {
       string message = string.Format("Expected {2} '{0}'{3}Actual == '{1}'", expected, actual, (equal ? "==" : "=/="), Environment.NewLine);
       Output.WriteLine(message);
       throw new TestRunException(message);
@@ -50,7 +50,7 @@ namespace TDDUnit {
       } catch (TException) {
         return;
       }
-      Fail("<" + (typeof (TException)).Name + ">", string.Empty, true);
+      Fail("<" + (typeof (TException)).Name + ">", "<>", true);
     }
   }
 }

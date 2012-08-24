@@ -173,10 +173,11 @@ namespace TDDUnitTests {
 
     public void TestAssertThrowsShouldFailIfExceptionNotThrown() {
       try {
-        Assert.Throws<TestRunException>(() => { });
-      } catch (TestRunException e) {
-        Assert.Equal("Expected == '<TestRunException>'" + Environment.NewLine + "Actual == ''", e.Message);
+        Assert.Throws<TestRunException>(() => {});
+      } catch (TestRunException) {
+        return;
       }
+      Assert.Fail("<TestRunException>", "<>", true);
     }
   }
 
