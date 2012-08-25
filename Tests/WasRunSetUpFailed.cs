@@ -15,18 +15,18 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using TDDUnit;
+namespace TDDUnit {
+  namespace Tests {
+    class WasRunSetUpFailed : WasRunObj {
+      public WasRunSetUpFailed(string name)
+        : base(name) {
+      }
 
-namespace TDDUnitTests {
-  class WasRunSetUpFailed : WasRunObj {
-    public WasRunSetUpFailed(string name)
-      : base(name) {
-    }
+      public override void SetUp() {
+        base.SetUp();
 
-    public override void SetUp() {
-      base.SetUp();
-
-      throw new TestRunException("SetUp failed");
+        throw new TestRunException("SetUp failed");
+      }
     }
   }
 }

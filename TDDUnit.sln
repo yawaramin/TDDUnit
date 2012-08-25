@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDDUnit", "TDDUnit.csproj", "{3C6ABD38-D033-45EE-BF25-758BE29E8748}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDDUnitTests", "TDDUnitTests\TDDUnitTests.csproj", "{5E7B95E8-1AA7-422C-9AE3-871449F7CDE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{5E7B95E8-1AA7-422C-9AE3-871449F7CDE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
